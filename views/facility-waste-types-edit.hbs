@@ -1,0 +1,29 @@
+<h1>{{title}}</h1>
+
+<form action="/facility-waste-types/{{facilityWasteTypeID}}/edit" method="POST">
+  <input type="hidden" name="facilityWasteTypeID" value="{{facilityWasteTypeID}}">
+
+  <div>
+    <label for="facilityID">Facility</label><br>
+    <select id="facilityID" name="facilityID" required>
+      {{#each facilities}}
+      <option value="{{facilityID}}" {{#ifEquals facilityID ../facilityID}}selected{{/ifEquals}}>
+        {{facilityID}} – {{name}}
+      </option>
+      {{/each}}
+    </select>
+  </div>
+  <div>
+    <label for="wasteTypeID">Waste Type</label><br>
+    <select id="wasteTypeID" name="wasteTypeID" required>
+      {{#each wasteTypes}}
+      <option value="{{wasteTypeID}}" {{#ifEquals wasteTypeID ../wasteTypeID}}selected{{/ifEquals}}>
+        {{wasteTypeID}} – {{material}}
+      </option>
+      {{/each}}
+    </select>
+  </div>
+  <button type="submit">Save Changes</button>
+</form>
+
+<p><a href="/facility-waste-types">← Back to list</a></p>

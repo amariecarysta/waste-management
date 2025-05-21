@@ -1,0 +1,25 @@
+<h1>{{title}}</h1>
+
+<form action="/vehicles/{{vehicle_ID}}/edit" method="POST">
+  <input type="hidden" name="vehicle_ID" value="{{vehicle_ID}}">
+
+  <div>
+    <label for="license_plate">License Plate</label><br>
+    <input id="license_plate" name="license_plate" type="text" value="{{license_plate}}" required>
+  </div>
+  <div>
+    <label for="service_type">Service Type</label><br>
+    <input id="service_type" name="service_type" type="text" value="{{service_type}}" required>
+  </div>
+  <div>
+    <label for="status">Status</label><br>
+    <input id="status" name="status" type="text" value="{{status}}" required>
+  </div>
+  <div>
+    <label for="waste_type_ID">Waste Type ID</label><br>
+    <input id="waste_type_ID" name="waste_type_ID" type="number" min="1" value="{{waste_type_ID}}" required>
+  </div>
+  <button type="submit">Save Changes</button>
+</form>
+
+<p><a href="/vehicles">← Back to list</a></p>

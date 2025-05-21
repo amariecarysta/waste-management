@@ -1,0 +1,31 @@
+<h1>{{title}}</h1>
+<p><a href="/routes/new">Add New Route</a></p>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Schedule</th>
+      <th>Active?</th>
+      <th>Vehicle ID</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each routes}}
+    <tr>
+      <td>{{route_ID}}</td>
+      <td>{{name}}</td>
+      <td>{{route_type}}</td>
+      <td>{{schedule}}</td>
+      <td>{{#if active_route}}Yes{{else}}No{{/if}}</td>
+      <td>{{vehicle_ID}}</td>
+      <td>
+        <a href="/routes/{{route_ID}}/edit">Edit</a> |
+        <a href="/routes/{{route_ID}}/delete">Delete</a>
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>

@@ -1,0 +1,23 @@
+<h1>{{title}}</h1>
+
+<form action="/vehicles/new" method="POST">
+  <div>
+    <label for="license_plate">License Plate</label><br>
+    <input id="license_plate" name="license_plate" type="text" required>
+  </div>
+  <div>
+    <label for="service_type">Service Type</label><br>
+    <input id="service_type" name="service_type" type="text" required>
+  </div>
+  <div>
+    <label for="status">Status</label><br>
+    <input id="status" name="status" type="text" required>
+  </div>
+  <div>
+    <label for="waste_type_ID">Waste Type ID</label><br>
+    <input id="waste_type_ID" name="waste_type_ID" type="number" min="1" required>
+  </div>
+  <button type="submit">Create Vehicle</button>
+</form>
+
+<p><a href="/vehicles">← Back to list</a></p>

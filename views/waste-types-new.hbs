@@ -1,0 +1,17 @@
+<h1>{{title}}</h1>
+
+<form action="/waste-types/new" method="POST">
+  <div>
+    <label for="material">Material</label><br>
+    <input id="material" name="material" type="text" required>
+  </div>
+  <div>
+    <label>
+      <input type="checkbox" name="hazardous" value="1">
+      Hazardous?
+    </label>
+  </div>
+  <button type="submit">Create Waste Type</button>
+</form>
+
+<p><a href="/waste-types">← Back to list</a></p>

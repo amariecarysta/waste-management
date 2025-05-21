@@ -1,0 +1,25 @@
+<h1>{{title}}</h1>
+
+<form action="/facility-waste-types/new" method="POST">
+  <div>
+    <label for="facilityID">Facility</label><br>
+    <select id="facilityID" name="facilityID" required>
+
+      {{#each facilities}}
+      <option value="{{facilityID}}">{{facilityID}} – {{name}}</option>
+      {{/each}}
+    </select>
+  </div>
+  <div>
+    <label for="wasteTypeID">Waste Type</label><br>
+    <select id="wasteTypeID" name="wasteTypeID" required>
+  
+      {{#each wasteTypes}}
+      <option value="{{wasteTypeID}}">{{wasteTypeID}} – {{material}}</option>
+      {{/each}}
+    </select>
+  </div>
+  <button type="submit">Create Link</button>
+</form>
+
+<p><a href="/facility-waste-types">← Back to list</a></p>

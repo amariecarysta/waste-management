@@ -1,0 +1,10 @@
+<h1>{{title}}</h1>
+<p>Are you sure you want to delete the route:</p>
+<ul>
+  <li><strong>ID:</strong> {{route_ID}}</li>
+  <li><strong>Name:</strong> {{name}}</li>
+</ul>
+<form action="/routes/{{route_ID}}/delete" method="POST">
+  <button type="submit">Yes, Delete</button>
+  <a href="/routes">Cancel</a>
+</form>

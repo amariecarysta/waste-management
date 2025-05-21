@@ -1,0 +1,30 @@
+<h1>All Facilities</h1>
+<p><a href="/facilities/new">Add New Facility</a></p>
+
+<table border="1" cellpadding="4">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Location</th>
+      <th>Type</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each facilities}}
+    <tr>
+      <td>{{facilityID}}</td>
+      <td>{{name}}</td>
+      <td>{{location}}</td>
+      <td>{{facilityType}}</td>
+      <td>
+        <a href="/facilities/{{facilityID}}/edit">Edit</a> |
+        <a href="/facilities/{{facilityID}}/delete">Delete</a>
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+<p><a href="/">← Back to Dashboard</a></p>

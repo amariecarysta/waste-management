@@ -1,0 +1,12 @@
+<h1>{{title}}</h1>
+
+<p>Are you sure you want to delete the facility:</p>
+<ul>
+  <li><strong>ID:</strong> {{facilityID}}</li>
+  <li><strong>Name:</strong> {{name}}</li>
+</ul>
+
+<form action="/facilities/{{facilityID}}/delete" method="POST">
+  <button type="submit">Yes, Delete</button>
+  <a href="/facilities">Cancel</a>
+</form>

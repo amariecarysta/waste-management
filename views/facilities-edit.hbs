@@ -1,0 +1,22 @@
+<h1>{{title}}</h1>
+
+<form action="/facilities/{{facilityID}}/edit" method="POST">
+
+  <input type="hidden" name="facilityID" value="{{facilityID}}">
+
+  <div>
+    <label for="name">Name</label><br>
+    <input id="name" name="name" type="text" value="{{name}}" required>
+  </div>
+  <div>
+    <label for="location">Location</label><br>
+    <input id="location" name="location" type="text" value="{{location}}" required>
+  </div>
+  <div>
+    <label for="facilityType">Type</label><br>
+    <input id="facilityType" name="facilityType" type="text" value="{{facilityType}}" required>
+  </div>
+  <button type="submit">Save Changes</button>
+</form>
+
+<p><a href="/facilities">← Back to list</a></p>

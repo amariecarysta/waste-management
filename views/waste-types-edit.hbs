@@ -1,0 +1,19 @@
+<h1>{{title}}</h1>
+
+<form action="/waste-types/{{wasteTypeID}}/edit" method="POST">
+  <input type="hidden" name="wasteTypeID" value="{{wasteTypeID}}">
+
+  <div>
+    <label for="material">Material</label><br>
+    <input id="material" name="material" type="text" value="{{material}}" required>
+  </div>
+  <div>
+    <label>
+      <input type="checkbox" name="hazardous" value="1" {{#if hazardous}}checked{{/if}}>
+      Hazardous?
+    </label>
+  </div>
+  <button type="submit">Save Changes</button>
+</form>
+
+<p><a href="/waste-types">← Back to list</a></p>

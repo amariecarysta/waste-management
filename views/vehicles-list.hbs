@@ -1,0 +1,31 @@
+<h1>{{title}}</h1>
+<p><a href="/vehicles/new">Add New Vehicle</a></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>License Plate</th>
+      <th>Service Type</th>
+      <th>Status</th>
+      <th>Waste Type ID</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each vehicles}}
+    <tr>
+      <td>{{vehicle_ID}}</td>
+      <td>{{license_plate}}</td>
+      <td>{{service_type}}</td>
+      <td>{{status}}</td>
+      <td>{{waste_type_ID}}</td>
+      <td>
+        <a href="/vehicles/{{vehicle_ID}}/edit">Edit</a> |
+        <a href="/vehicles/{{vehicle_ID}}/delete">Delete</a>
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+<p><a href="/">← Back to Dashboard</a></p>

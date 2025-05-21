@@ -1,0 +1,44 @@
+<h1>All Customers</h1>
+<a href="/customers/new">Add New Customer</a>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th><th>Name</th><th>Address</th>
+      <th>Type</th><th>Contact</th><th>Route</th><th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each customers}}
+    <tr>
+      <td>{{customer_ID}}</td>
+      <td>{{name}}</td>
+      <td>{{address}}</td>
+      <td>{{type}}</td>
+      <td>{{contact_number}}</td>
+      <td>{{route_ID}}</td>
+      <td>
+        <a href="/customers/{{customer_ID}}/edit">Edit</a> |
+        <a href="/customers/{{customer_ID}}/delete">Delete</a>
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+<h1>Add a New Customer</h1>
+<form action="/customers/new" method="POST">
+  <label>Name:        <input name="name"></label><br>
+  <label>Address:     <input name="address"></label><br>
+  <label>Type:
+    <select name="type">
+      <option>Residential</option>
+      <option>Commercial</option>
+      <option>Industrial</option>
+    </select>
+  </label><br>
+  <label>Contact No:  <input name="contact_number"></label><br>
+  <label>Route ID:    <input name="route_ID" type="number"></label><br>
+  <button type="submit">Create</button>
+</form>
+</table>
+<p><a href="/">← Back to Dashboard</a></p>

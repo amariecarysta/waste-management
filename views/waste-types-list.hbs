@@ -1,0 +1,27 @@
+<h1>{{title}}</h1>
+<p><a href="/waste-types/new">Add New Waste Type</a></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Material</th>
+      <th>Hazardous?</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each wasteTypes}}
+    <tr>
+      <td>{{wasteTypeID}}</td>
+      <td>{{material}}</td>
+      <td>{{#if hazardous}}Yes{{else}}No{{/if}}</td>
+      <td>
+        <a href="/waste-types/{{wasteTypeID}}/edit">Edit</a> |
+        <a href="/waste-types/{{wasteTypeID}}/delete">Delete</a>
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+<p><a href="/">← Back to Dashboard</a></p>

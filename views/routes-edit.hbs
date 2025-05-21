@@ -1,0 +1,27 @@
+<h1>{{title}}</h1>
+<form action="/routes/{{route_ID}}/edit" method="POST">
+  <div>
+    <label for="name">Name</label><br>
+    <input id="name" name="name" type="text" value="{{name}}" required>
+  </div>
+  <div>
+    <label for="route_type">Type</label><br>
+    <input id="route_type" name="route_type" type="text" value="{{route_type}}" required>
+  </div>
+  <div>
+    <label for="schedule">Schedule</label><br>
+    <input id="schedule" name="schedule" type="text" value="{{schedule}}" required>
+  </div>
+  <div>
+    <label>
+      <input type="checkbox" name="active_route" value="1" {{#if active_route}}checked{{/if}}>
+      Active
+    </label>
+  </div>
+  <div>
+    <label for="vehicle_ID">Vehicle ID</label><br>
+    <input id="vehicle_ID" name="vehicle_ID" type="number" min="1" value="{{vehicle_ID}}">
+  </div>
+  <button type="submit">Save Changes</button>
+</form>
+<p><a href="/routes">← Back to list</a></p>

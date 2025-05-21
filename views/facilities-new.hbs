@@ -1,0 +1,19 @@
+<h1>{{title}}</h1>
+
+<form action="/facilities/new" method="POST">
+  <div>
+    <label for="name">Name</label><br>
+    <input id="name" name="name" type="text" required>
+  </div>
+  <div>
+    <label for="location">Location</label><br>
+    <input id="location" name="location" type="text" required>
+  </div>
+  <div>
+    <label for="facilityType">Type</label><br>
+    <input id="facilityType" name="facilityType" type="text" required>
+  </div>
+  <button type="submit">Create Facility</button>
+</form>
+
+<p><a href="/facilities">← Back to list</a></p>

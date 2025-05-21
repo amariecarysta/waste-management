@@ -1,0 +1,27 @@
+<h1>{{title}}</h1>
+<form action="/routes/new" method="POST">
+  <div>
+    <label for="name">Name</label><br>
+    <input id="name" name="name" type="text" required>
+  </div>
+  <div>
+    <label for="route_type">Type</label><br>
+    <input id="route_type" name="route_type" type="text" required>
+  </div>
+  <div>
+    <label for="schedule">Schedule</label><br>
+    <input id="schedule" name="schedule" type="text" required>
+  </div>
+  <div>
+    <label>
+      <input type="checkbox" name="active_route" value="1">
+      Active
+    </label>
+  </div>
+  <div>
+    <label for="vehicle_ID">Vehicle ID</label><br>
+    <input id="vehicle_ID" name="vehicle_ID" type="number" min="1">
+  </div>
+  <button type="submit">Create Route</button>
+</form>
+<p><a href="/routes">← Back to list</a></p>
