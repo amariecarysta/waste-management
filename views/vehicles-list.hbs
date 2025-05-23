@@ -1,5 +1,6 @@
 <h1>{{title}}</h1>
-<p><a href="/vehicles/new">Add New Vehicle</a></p>
+
+<p><a href="/vehicles/new" class="btn">Add New Vehicle</a></p>
 
 <table>
   <thead>
@@ -15,17 +16,16 @@
   <tbody>
     {{#each vehicles}}
     <tr>
-      <td>{{vehicle_ID}}</td>
-      <td>{{license_plate}}</td>
-      <td>{{service_type}}</td>
-      <td>{{status}}</td>
-      <td>{{waste_type_ID}}</td>
+      <td>{{this.vehicleID}}</td>
+      <td>{{this.licensePlate}}</td>
+      <td>{{this.serviceType}}</td>
+      <td>{{this.status}}</td>
+      <td>{{this.wasteTypeID}}</td>
       <td>
-        <a href="/vehicles/{{vehicle_ID}}/edit">Edit</a> |
-        <a href="/vehicles/{{vehicle_ID}}/delete">Delete</a>
+        <a href="/vehicles/{{this.vehicleID}}/edit">Edit</a> |
+        <a href="/vehicles/{{this.vehicleID}}/delete">Delete</a>
       </td>
     </tr>
     {{/each}}
   </tbody>
 </table>
-<p><a href="/">← Back to Dashboard</a></p>

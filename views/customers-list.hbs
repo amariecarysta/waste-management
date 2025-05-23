@@ -10,15 +10,15 @@
   <tbody>
     {{#each customers}}
     <tr>
-      <td>{{customer_ID}}</td>
+      <td>{{customerID}}</td>
       <td>{{name}}</td>
       <td>{{address}}</td>
       <td>{{type}}</td>
-      <td>{{contact_number}}</td>
-      <td>{{route_ID}}</td>
+      <td>{{contactNumber}}</td>
+      <td>{{routeID}}</td>
       <td>
-        <a href="/customers/{{customer_ID}}/edit">Edit</a> |
-        <a href="/customers/{{customer_ID}}/delete">Delete</a>
+        <a href="/customers/{{customerID}}/edit">Edit</a> |
+        <a href="/customers/{{customerID}}/delete">Delete</a>
       </td>
     </tr>
     {{/each}}
@@ -36,8 +36,8 @@
       <option>Industrial</option>
     </select>
   </label><br>
-  <label>Contact No:  <input name="contact_number"></label><br>
-  <label>Route ID:    <input name="route_ID" type="number"></label><br>
+  <label>Contact No:  <input name="contactNumber"></label><br>
+  <label>Route ID:    <input name="route_D" type="number"></label><br>
   <button type="submit">Create</button>
 </form>
 </table>

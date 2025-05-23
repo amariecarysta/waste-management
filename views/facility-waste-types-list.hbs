@@ -1,27 +1,26 @@
 <h1>{{title}}</h1>
-<p><a href="/facility-waste-types/new">Add New Link</a></p>
+
+<p><a href="/facility-waste-types/new" class="btn">Link Facility to Waste Type</a></p>
 
 <table>
   <thead>
     <tr>
-      <th>Link ID</th>
-      <th>Facility ID</th>
-      <th>Waste Type ID</th>
+      <th>ID</th>
+      <th>Facility Name</th>
+      <th>Waste Type</th>
       <th>Actions</th>
     </tr>
   </thead>
   <tbody>
     {{#each links}}
     <tr>
-      <td>{{facilityWasteTypeID}}</td>
-      <td>{{facilityID}}</td>
-      <td>{{wasteTypeID}}</td>
+      <td>{{this.facilityWasteTypeID}}</td>
+      <td>{{this.facilityName}}</td>
+      <td>{{this.wasteTypeMaterial}}</td>
       <td>
-        <a href="/facility-waste-types/{{facilityWasteTypeID}}/edit">Edit</a> |
-        <a href="/facility-waste-types/{{facilityWasteTypeID}}/delete">Delete</a>
+        <a href="/facility-waste-types/{{this.facilityWasteTypeID}}/delete">Remove Link</a>
       </td>
     </tr>
     {{/each}}
   </tbody>
 </table>
-<p><a href="/">← Back to Dashboard</a></p>

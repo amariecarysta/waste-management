@@ -31,11 +31,37 @@ app.get('/', (req, res) => {
   });
 });
 
+// RESET Database Route
+app.get('/reset', (req, res) => {
+  res.render('reset', { 
+    title: 'Reset Database',
+    warning: 'This will delete all data and reset the database'
+  });
+});
+
+app.post('/reset', async (req, res, next) => {
+  try {
+    // Call the stored procedure
+    await pool.query('CALL ResetDatabase()');
+    
+    // Render success page
+    res.render('reset-success', { 
+      title: 'Database Reset',
+      message: 'Database has been successfully reset!'
+    });
+  } catch (err) {
+    console.error('Reset error:', err);
+    res.render('error', {
+      title: 'Reset Failed',
+      message: 'Failed to reset database: ' + err.message
+    });
+  }
+});
 
 app.get('/customers', async (req, res, next) => {
   try {
     const [customers] = await pool.query(`
-      SELECT customer_ID, name, address, type, contact_number, route_ID
+      SELECT customerID, name, address, type, contactNumber, routeID
         FROM customers
     `);
     res.render('customers-list', { title: 'Customers', customers });
@@ -133,7 +159,7 @@ app.post('/facilities/:id/delete', async (req, res) => {
 app.get('/routes', async (req, res, next) => {
   try {
     const [routes] = await pool.query(`
-      SELECT route_ID, name, route_type, schedule, active_route, vehicle_ID
+      SELECT routeID, name, routeType, schedule, activeRoute, vehicleID
         FROM routes
     `);
     res.render('routes-list', { title: 'Routes', routes });
@@ -148,11 +174,11 @@ app.get('/routes/new', (req, res) => {
 
 app.post('/routes/new', async (req, res, next) => {
   try {
-    const { name, route_type, schedule, active_route, vehicle_ID } = req.body;
+    const { name, routeType, schedule, activeRoute, vehicleID } = req.body;
     await pool.query(
-      `INSERT INTO routes (name, route_type, schedule, active_route, vehicle_ID)
+      `INSERT INTO routes (name, routeType, schedule, activeRoute, vehicleID)
        VALUES (?, ?, ?, ?, ?)`,
-      [name, route_type, schedule, active_route ? 1 : 0, vehicle_ID || null]
+      [name, routeType, schedule, activeRoute ? 1 : 0, vehicleID || null]
     );
     res.redirect('/routes');
   } catch (err) {
@@ -163,19 +189,19 @@ app.post('/routes/new', async (req, res, next) => {
 app.get('/routes/:id/edit', async (req, res, next) => {
   try {
     const [[route]] = await pool.query(
-      `SELECT route_ID, name, route_type, schedule, active_route, vehicle_ID
+      `SELECT routeID, name, routeType, schedule, activeRoute, vehicleID
          FROM routes
-        WHERE route_ID = ?`,
+        WHERE routeID = ?`,
       [req.params.id]
     );
     res.render('routes-edit', {
       title: 'Edit Route',
-      route_ID:      route.route_ID,
+      routeID:      route.routeID,
       name:          route.name,
-      route_type:    route.route_type,
+      routeType:    route.routeType,
       schedule:      route.schedule,
-      active_route:  route.active_route,
-      vehicle_ID:    route.vehicle_ID
+      activeRoute:  route.activeRoute,
+      vehicleID:    route.vehicleID
     });
   } catch (err) {
     next(err);
@@ -185,12 +211,12 @@ app.get('/routes/:id/edit', async (req, res, next) => {
 
 app.post('/routes/:id/edit', async (req, res, next) => {
   try {
-    const { name, route_type, schedule, active_route, vehicle_ID } = req.body;
+    const { name, routeType, schedule, activeRoute, vehicleID } = req.body;
     await pool.query(
       `UPDATE routes
-          SET name = ?, route_type = ?, schedule = ?, active_route = ?, vehicle_ID = ?
-        WHERE route_ID = ?`,
-      [name, route_type, schedule, active_route ? 1 : 0, vehicle_ID || null, req.params.id]
+          SET name = ?, routeType = ?, schedule = ?, activeRoute = ?, vehicleID = ?
+        WHERE routeID = ?`,
+      [name, routeType, schedule, activeRoute ? 1 : 0, vehicleID || null, req.params.id]
     );
     res.redirect('/routes');
   } catch (err) {
@@ -201,12 +227,12 @@ app.post('/routes/:id/edit', async (req, res, next) => {
 app.get('/routes/:id/delete', async (req, res, next) => {
   try {
     const [[route]] = await pool.query(
-      `SELECT route_ID, name FROM routes WHERE route_ID = ?`,
+      `SELECT routeID, name FROM routes WHERE routeID = ?`,
       [req.params.id]
     );
     res.render('routes-delete', {
       title: 'Delete Route',
-      route_ID: route.route_ID,
+      routeID: route.routeID,
       name:     route.name
     });
   } catch (err) {
@@ -218,7 +244,7 @@ app.get('/routes/:id/delete', async (req, res, next) => {
 app.post('/routes/:id/delete', async (req, res, next) => {
   try {
     await pool.query(
-      `DELETE FROM routes WHERE route_ID = ?`,
+      `DELETE FROM routes WHERE routeID = ?`,
       [req.params.id]
     );
     res.redirect('/routes');
@@ -233,7 +259,7 @@ app.post('/routes/:id/delete', async (req, res, next) => {
 app.get('/vehicles', async (req, res, next) => {
   try {
     const [vehicles] = await pool.query(`
-      SELECT vehicle_ID, license_plate, service_type, status, waste_type_ID
+      SELECT vehicleID, licensePlate, serviceType, status, wasteTypeID
         FROM vehicles
     `);
     res.render('vehicles-list', { title: 'Vehicles', vehicles });
@@ -255,12 +281,16 @@ app.get('/waste-types', async (req, res, next) => {
   }
 });
 
-
 app.get('/facility-waste-types', async (req, res, next) => {
   try {
     const [links] = await pool.query(`
-      SELECT facilityWasteTypeID, facilityID, wasteTypeID
-        FROM disposalFacilitiesHasWasteTypes
+      SELECT 
+        dfht.facilityWasteTypeID,
+        df.name AS facilityName,
+        wt.material AS wasteTypeMaterial
+      FROM disposalFacilitiesHasWasteTypes dfht
+      JOIN disposalFacilities df ON dfht.facilityID = df.facilityID
+      JOIN wasteTypes wt ON dfht.wasteTypeID = wt.wasteTypeID
     `);
     res.render('facility-waste-types-list', {
       title: 'Facility Waste Types',
@@ -270,8 +300,6 @@ app.get('/facility-waste-types', async (req, res, next) => {
     next(err);
   }
 });
-
-
 
 const PORT = process.env.PORT || 6917;
 app.listen(PORT, () => {
