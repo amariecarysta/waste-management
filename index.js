@@ -33,6 +33,7 @@ app.get('/', (req, res) => {
 
 // RESET Database Route
 app.get('/reset', (req, res) => {
+  console.log('-- GET /reset hit --');
   res.render('reset', { 
     title: 'Reset Database',
     warning: 'This will delete all data and reset the database'
