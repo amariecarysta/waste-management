@@ -2,6 +2,7 @@ const express = require('express');
 const { engine } = require('express-handlebars');
 const path = require('path');
 const pool = require('./db-connector');
+console.log('>>> LOADED', __filename);
 
 
 const app = express();
@@ -33,7 +34,7 @@ app.get('/', (req, res) => {
 
 // RESET Database Route
 app.get('/reset', (req, res) => {
-  console.log('-- GET /reset hit --');
+
   res.render('reset', { 
     title: 'Reset Database',
     warning: 'This will delete all data and reset the database'
